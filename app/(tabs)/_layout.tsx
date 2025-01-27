@@ -1,6 +1,6 @@
 import { HapticTab } from "@/components/HapticTab";
 import { IconSymbol } from "@/components/ui/IconSymbol";
-import { Colors } from "@/constants/Colors";
+import { Colors } from "@/constants/colors";
 import { Tabs } from "expo-router";
 import React from "react";
 import { View } from "react-native";

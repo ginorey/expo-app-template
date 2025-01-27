@@ -4,13 +4,13 @@
  */
 
 export const Colors = {
-	background: "#0F0F13",
-	primary: "#ECEDEE",
-	secondary: "#151718",
-	link: "#8B5CF6",
-	border: "#2A2A35",
-	accent: "#8B5CF6", // Purple accent
-	icon: "#9BA1A6",
-	tabIconDefault: "#9BA1A6",
-	tabIconSelected: "#8B5CF6",
+  background: "#0F0F13",
+  primary: "#ECEDEE",
+  secondary: "#9BA1A6",
+  link: "#8B5CF6",
+  border: "#2A2A35",
+  accent: "#8B5CF6", // Purple accent
+  icon: "#9BA1A6",
+  tabIconDefault: "#9BA1A6",
+  tabIconSelected: "#8B5CF6",
 };
