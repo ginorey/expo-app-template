@@ -114,16 +114,10 @@ export default function Deposit() {
 }
 
 function QuickDeposit() {
-  const { account: localAccount, wallet: localWallet } = useInAppWallet();
+  const { account: localAccount } = useInAppWallet();
   const { account: payerAccount, wallet: payerWallet } = useExternalWallet();
-  const setActiveWallet = useSetActiveWallet();
   const { connect } = useConnect({
-    onConnect: () => {
-      // TODO replace with option to not set active wallet
-      if (localWallet) {
-        setActiveWallet(localWallet);
-      }
-    },
+    setWalletAsActive: false, // only connect, don't set as active
     client,
   });
   const { disconnect } = useDisconnect();

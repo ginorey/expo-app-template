@@ -26,6 +26,22 @@ export default function LinkProfile() {
     error,
   } = useLinkProfile();
 
+  const linkSocial = (strategy: InAppWalletSocialAuth) => {
+    linkProfile({
+      client,
+      strategy,
+    });
+  };
+
+  const linkWallet = (walletId: WalletId) => {
+    linkProfile({
+      client,
+      strategy: "wallet",
+      wallet: createWallet(walletId),
+      chain: chain,
+    });
+  };
+
   if (isLinkingProfile) {
     return (
       <View className="flex-1 items-center justify-center">
@@ -48,16 +64,14 @@ export default function LinkProfile() {
         {authStrategies.map((strategy) => (
           <SocialLinkButton
             strategy={strategy}
-            linkProfile={linkProfile}
-            isLinkingProfile={isLinkingProfile}
-            error={error}
+            onClick={linkSocial}
             key={strategy}
           />
         ))}
         {supportedWallets.map((walletId) => (
           <WalletLinkButton
             walletId={walletId}
-            linkProfile={linkProfile}
+            onClick={linkWallet}
             key={walletId}
           />
         ))}
@@ -68,24 +82,15 @@ export default function LinkProfile() {
 
 function SocialLinkButton({
   strategy,
-  linkProfile,
+  onClick,
 }: {
   strategy: InAppWalletSocialAuth;
-  linkProfile: ReturnType<typeof useLinkProfile>["mutate"]; // TODO change to onclick
-  isLinkingProfile: boolean;
-  error: Error | null;
+  onClick: (strategy: InAppWalletSocialAuth) => void;
 }) {
-  const linkSocial = () => {
-    linkProfile({
-      client,
-      strategy,
-    });
-  };
-
   return (
     <TouchableOpacity
       className="w-full flex-row items-center justify-start py-4 px-6 bg-backgroundSecondary rounded-lg gap-4"
-      onPress={linkSocial}
+      onPress={() => onClick(strategy)}
     >
       <SocialIcon
         provider={strategy}
@@ -102,25 +107,16 @@ function SocialLinkButton({
 
 function WalletLinkButton({
   walletId,
-  linkProfile,
+  onClick,
 }: {
   walletId: WalletId;
-  linkProfile: ReturnType<typeof useLinkProfile>["mutate"];
+  onClick: (walletId: WalletId) => void;
 }) {
-  const linkWallet = () => {
-    linkProfile({
-      client,
-      strategy: "wallet",
-      wallet: createWallet(walletId),
-      chain: chain,
-    });
-  };
-
   return (
     <WalletProvider id={walletId}>
       <TouchableOpacity
         className="w-full flex-row items-center justify-start py-4 px-6 bg-backgroundSecondary rounded-lg gap-4"
-        onPress={linkWallet}
+        onPress={() => onClick(walletId)}
       >
         <WalletIcon width={42} height={42} style={{ borderRadius: 4 }} />
         <WalletName

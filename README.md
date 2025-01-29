@@ -19,6 +19,10 @@ Built with
 
 Fork this repo, add your own logic, and start building!
 
+## Live demo
+
+[Watch the live demo](https://x.com/joenrv/status/1884729861732000221)
+
 ## Setup
 
 Create a new project in the [thirdweb dashboard](https://thirdweb.com/team).

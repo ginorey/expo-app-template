@@ -56,7 +56,7 @@
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
     "tailwindcss": "3.4.17",
-    "thirdweb": "5.87.0"
+    "thirdweb": "5.87.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
