@@ -3,7 +3,7 @@ import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/colors";
 import { Tabs } from "expo-router";
 import React from "react";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 
 export default function TabLayout() {
   return (
@@ -11,30 +11,39 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors.tabIconSelected,
         tabBarInactiveTintColor: Colors.tabIconDefault,
-        headerShown: false,
+        headerShown: true,
+        headerTitleStyle: {
+          color: Colors.primary,
+        },
+        headerStyle: {
+          backgroundColor: Colors.backgroundSecondary,
+        },
         tabBarButton: HapticTab,
-        tabBarBackground: () => <View className="bg-background" />,
         tabBarStyle: {
+          minHeight: 52,
           borderColor: Colors.border,
           backgroundColor: Colors.background,
+          paddingTop: Platform.OS === "ios" ? 10 : 2,
         },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Deposit",
+          title: "Home",
+          tabBarShowLabel: false,
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="arrow.down.app" color={color} />
+            <IconSymbol size={32} name="house.fill" color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="profile"
         options={{
-          title: "Withdraw",
+          title: "Profile",
+          tabBarShowLabel: false,
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="dollarsign.circle" color={color} />
+            <IconSymbol size={32} name="person.fill" color={color} />
           ),
         }}
       />

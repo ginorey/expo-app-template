@@ -14,7 +14,7 @@ export const client = createThirdwebClient({
   clientId,
 });
 
-export const chain = baseSepolia;
+export const chain = base;
 
 export const inApp = inAppWallet({
   smartAccount: {

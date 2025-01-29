@@ -5,6 +5,7 @@
 
 export const Colors = {
   background: "#0F0F13",
+  backgroundSecondary: "#1A1A20",
   primary: "#ECEDEE",
   secondary: "#9BA1A6",
   link: "#8B5CF6",
