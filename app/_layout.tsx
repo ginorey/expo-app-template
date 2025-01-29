@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { Colors } from "@/constants/colors";
 import { client, inApp } from "@/constants/thirdweb";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { remapProps } from "nativewind";
 import {
   ActivityIndicator,
@@ -25,9 +26,7 @@ import {
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-remapProps(AccountAddress, {
-  className: "style",
-});
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -46,9 +45,11 @@ export default function RootLayout() {
 
   return (
     <View className="flex-1">
-      <ThirdwebProvider>
-        <InnerApp />
-      </ThirdwebProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThirdwebProvider>
+          <InnerApp />
+        </ThirdwebProvider>
+      </QueryClientProvider>
     </View>
   );
 }

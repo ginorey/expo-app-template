@@ -73,7 +73,7 @@ function SocialLinkButton({
   linkProfile,
 }: {
   strategy: InAppWalletSocialAuth;
-  linkProfile: ReturnType<typeof useLinkProfile>["mutate"];
+  linkProfile: ReturnType<typeof useLinkProfile>["mutate"]; // TODO change to onclick
   isLinkingProfile: boolean;
   error: Error | null;
 }) {

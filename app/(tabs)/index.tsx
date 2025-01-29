@@ -2,9 +2,10 @@ import { Link } from "expo-router";
 import { SafeAreaView, Text, TouchableOpacity } from "react-native";
 import { useActiveAccount } from "thirdweb/react";
 import { shortenAddress } from "thirdweb/utils";
+import { useInAppWallet } from "../../hooks/useInAppWallet";
 
 export default function HomeScreen() {
-  const account = useActiveAccount();
+  const { account } = useInAppWallet();
   return (
     <SafeAreaView className="flex-col flex-1 w-full items-center justify-center bg-background">
       <Text className="text-3xl font-bold text-primary">

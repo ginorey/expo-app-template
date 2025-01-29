@@ -9,16 +9,16 @@ import {
   AccountBlobbie,
   AccountProvider,
   SocialIcon,
-  useActiveAccount,
   useProfiles,
 } from "thirdweb/react";
 import { shortenAddress } from "thirdweb/utils";
 import { Colors } from "../../constants/colors";
 import { chain, client } from "../../constants/thirdweb";
+import { useInAppWallet } from "../../hooks/useInAppWallet";
 
 export function Profile() {
   const router = useRouter();
-  const account = useActiveAccount();
+  const { account } = useInAppWallet();
   const profilesQuery = useProfiles({
     client,
   });
