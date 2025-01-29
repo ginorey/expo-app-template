@@ -26,6 +26,7 @@ import {
   useConnect,
   useDisconnect,
   useLinkProfile,
+  useSetActiveWallet,
 } from "thirdweb/react";
 import { shortenAddress } from "thirdweb/utils";
 import { WalletId, createWallet } from "thirdweb/wallets";
@@ -115,9 +116,18 @@ export default function Deposit() {
 }
 
 function QuickDeposit() {
-  const { account: localAccount } = useInAppWallet();
+  const { account: localAccount, wallet: localWallet } = useInAppWallet();
   const { account: payerAccount, wallet: payerWallet } = useExternalWallet();
-  const { connect } = useConnect();
+  const setActiveWallet = useSetActiveWallet();
+  const { connect } = useConnect({
+    onConnect: () => {
+      // TODO replace with option to not set active wallet
+      if (localWallet) {
+        setActiveWallet(localWallet);
+      }
+    },
+    client,
+  });
   const { disconnect } = useDisconnect();
 
   const depositMutation = useMutation({

@@ -55,7 +55,6 @@ export default function RootLayout() {
 }
 
 function InnerApp() {
-  const router = useRouter();
   const autoConnecQuery = useAutoConnect({
     client,
     wallets: [inApp],

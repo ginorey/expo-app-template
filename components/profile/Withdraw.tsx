@@ -1,13 +1,17 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  Linking,
+  Pressable,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { NATIVE_TOKEN_ADDRESS, prepareTransaction } from "thirdweb";
+import { resolveAddress } from "thirdweb/extensions/ens";
 import { convertCryptoToFiat } from "thirdweb/pay";
 import {
   AccountAvatar,
@@ -17,13 +21,18 @@ import {
   useSendTransaction,
   useWalletBalance,
 } from "thirdweb/react";
+import { shortenHex } from "thirdweb/utils";
 import { Colors } from "../../constants/colors";
 import { chain, client } from "../../constants/thirdweb";
+import { useExternalWallet } from "../../hooks/useExternalWallet";
 import { useInAppWallet } from "../../hooks/useInAppWallet";
 
 export default function Withdraw() {
   const { account } = useInAppWallet();
-  const [recipientAddress, setRecipientAddress] = useState("");
+  const { account: externalAccount } = useExternalWallet();
+  const [recipientAddress, setRecipientAddress] = useState(
+    externalAccount?.address || "",
+  );
   const [amountUSD, setAmountUSD] = useState("");
   const [amountETH, setAmountETH] = useState(0n);
   const [totalBalanceUSD, setTotalBalanceUSD] = useState(0);
@@ -60,19 +69,24 @@ export default function Withdraw() {
   }
 
   const handlePercentageSelect = (percentage: number) => {
-    const amountUSD = totalBalanceUSD * percentage;
-    const amountETH = (balanceQuery.data?.value || 0n) * BigInt(percentage);
+    const amountUSD = (totalBalanceUSD * percentage) / 100;
+    const amountETH =
+      ((balanceQuery.data?.value || 0n) * BigInt(percentage)) / 100n;
 
-    setAmountUSD(`$${amountUSD.toString()}`);
+    setAmountUSD(`$${amountUSD.toFixed(2)}`);
     setAmountETH(amountETH);
   };
 
-  const handleWithdraw = () => {
+  const handleWithdraw = async () => {
     if (!amountETH) {
       return;
     }
+    const resolvedAddress = await resolveAddress({
+      name: recipientAddress,
+      client,
+    });
     const transaction = prepareTransaction({
-      to: recipientAddress,
+      to: resolvedAddress,
       value: amountETH,
       chain,
       client,
@@ -118,8 +132,11 @@ export default function Withdraw() {
             }
             style={{
               color: "white",
-              fontSize: 42,
+              fontSize: 36,
               fontWeight: "bold",
+            }}
+            queryOptions={{
+              refetchInterval: 5000,
             }}
           />
         </View>
@@ -144,7 +161,7 @@ export default function Withdraw() {
               <TouchableOpacity
                 key={percentage}
                 className="flex-1 bg-backgroundSecondary p-3 rounded-lg items-center"
-                onPress={() => handlePercentageSelect(percentage / 100)}
+                onPress={() => handlePercentageSelect(percentage)}
               >
                 <Text className="text-primary font-bold">{percentage}%</Text>
               </TouchableOpacity>
@@ -165,12 +182,39 @@ export default function Withdraw() {
         <TouchableOpacity
           className="w-full bg-accent p-4 rounded-lg items-center"
           onPress={handleWithdraw}
+          disabled={sendTransactionMutation.isPending}
+          style={{ opacity: sendTransactionMutation.isPending ? 0.5 : 1 }}
         >
           <View className="flex-row items-center gap-x-2">
             <FontAwesome5 name="angle-double-up" size={20} color="white" />
-            <Text className="text-white font-bold text-lg">Withdraw</Text>
+            <Text className="text-white font-bold text-lg">
+              {sendTransactionMutation.isPending
+                ? "Withdrawing..."
+                : `Withdraw ${amountUSD}`}
+            </Text>
           </View>
         </TouchableOpacity>
+
+        {sendTransactionMutation.isError && (
+          <Text className="text-red-500">
+            {sendTransactionMutation.error.message}
+          </Text>
+        )}
+
+        {sendTransactionMutation.isSuccess && (
+          <Pressable
+            onPress={() =>
+              Linking.openURL(
+                `${chain.blockExplorers?.[0]?.url}/tx/${sendTransactionMutation.data?.transactionHash}`,
+              )
+            }
+          >
+            <Text className="text-green-500 underline">
+              Trasaction sent:{" "}
+              {shortenHex(sendTransactionMutation.data?.transactionHash)}
+            </Text>
+          </Pressable>
+        )}
       </View>
     </AccountProvider>
   );

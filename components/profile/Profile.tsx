@@ -92,6 +92,9 @@ export function Profile() {
               fontSize: 48,
               fontWeight: "bold",
             }}
+            queryOptions={{
+              refetchInterval: 5000,
+            }}
           />
         </View>
         <View className="w-full flex-row items-center justify-center px-6 gap-6">

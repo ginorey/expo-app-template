@@ -9,15 +9,15 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className="flex-col flex-1 w-full items-center justify-center bg-background">
       <Text className="text-3xl font-bold text-primary">
-        Build your app here!
+        Ready to build your app?
       </Text>
       {account && (
         <>
           <Text className="text-lg text-primary mt-6">
-            User authenticated and ready to go
+            User is authenticated and ready to go!
           </Text>
           <Text className="text-lg text-secondary">
-            {shortenAddress(account.address)}
+            Smart Wallet: {shortenAddress(account.address)}
           </Text>
           <Link href="/(tabs)/profile" className="text-link font-bold mt-6">
             View Profile
