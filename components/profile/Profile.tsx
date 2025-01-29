@@ -112,6 +112,9 @@ export function Profile() {
           <TouchableOpacity
             activeOpacity={0.8}
             className="w-32 flex-col items-center justify-center gap-2 bg-backgroundSecondary rounded-lg p-4"
+            onPress={() => {
+              router.push("/withdraw");
+            }}
           >
             <FontAwesome5
               name="angle-double-up"

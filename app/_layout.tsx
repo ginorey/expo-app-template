@@ -111,6 +111,16 @@ function InnerApp() {
             headerTintColor: Colors.primary,
           }}
         />
+        <Stack.Screen
+          name="withdraw"
+          options={{
+            presentation: "modal",
+            headerTitle: "Withdraw",
+            headerTitleStyle: { color: Colors.primary },
+            headerStyle: { backgroundColor: Colors.backgroundSecondary },
+            headerTintColor: Colors.primary,
+          }}
+        />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="light" />

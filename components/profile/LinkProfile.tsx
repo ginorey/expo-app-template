@@ -12,14 +12,12 @@ import {
   createWallet,
 } from "thirdweb/wallets";
 import { Colors } from "../../constants/colors";
-import { chain, client } from "../../constants/thirdweb";
-
-const strategies: InAppWalletSocialAuth[] = ["google", "farcaster", "x"];
-const wallets: WalletId[] = [
-  "io.metamask",
-  "me.rainbow",
-  "com.coinbase.wallet",
-];
+import {
+  authStrategies,
+  chain,
+  client,
+  supportedWallets,
+} from "../../constants/thirdweb";
 
 export default function LinkProfile() {
   const {
@@ -47,7 +45,7 @@ export default function LinkProfile() {
   return (
     <View className="flex-col px-4 py-8">
       <View className="flex-col items-start justify-start gap-4">
-        {strategies.map((strategy) => (
+        {authStrategies.map((strategy) => (
           <SocialLinkButton
             strategy={strategy}
             linkProfile={linkProfile}
@@ -56,7 +54,7 @@ export default function LinkProfile() {
             key={strategy}
           />
         ))}
-        {wallets.map((walletId) => (
+        {supportedWallets.map((walletId) => (
           <WalletLinkButton
             walletId={walletId}
             linkProfile={linkProfile}
