@@ -1,6 +1,5 @@
 import { Link } from "expo-router";
-import { SafeAreaView, Text, TouchableOpacity } from "react-native";
-import { useActiveAccount } from "thirdweb/react";
+import { SafeAreaView, Text } from "react-native";
 import { shortenAddress } from "thirdweb/utils";
 import { useInAppWallet } from "../../hooks/useInAppWallet";
 

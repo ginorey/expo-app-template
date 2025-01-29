@@ -1,6 +1,6 @@
 import "../global.css";
 import { useFonts } from "expo-font";
-import { Stack, useRouter } from "expo-router";
+import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -8,20 +8,8 @@ import "react-native-reanimated";
 import { Colors } from "@/constants/colors";
 import { client, inApp } from "@/constants/thirdweb";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { remapProps } from "nativewind";
-import {
-  ActivityIndicator,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import {
-  AccountAddress,
-  ThirdwebProvider,
-  useAutoConnect,
-  useConnect,
-} from "thirdweb/react";
+import { ActivityIndicator, SafeAreaView, View } from "react-native";
+import { ThirdwebProvider, useAutoConnect, useConnect } from "thirdweb/react";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

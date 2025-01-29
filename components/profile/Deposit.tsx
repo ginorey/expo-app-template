@@ -21,11 +21,9 @@ import {
   AccountBlobbie,
   AccountProvider,
   WalletIcon,
-  WalletName,
   WalletProvider,
   useConnect,
   useDisconnect,
-  useLinkProfile,
   useSetActiveWallet,
 } from "thirdweb/react";
 import { shortenAddress } from "thirdweb/utils";

@@ -1,5 +1,4 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,

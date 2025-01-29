@@ -1,50 +1,65 @@
-# Welcome to your Expo app 👋
+# Expo onchain app template
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a template that handles the basics of an onchain app, specifically has all the user management and smart wallet logic built in.
 
-## Get started
+- 🔹 auto login as guest on launch
+- 🔹 smart wallet only, gas sponsored, ready to transact with no popups
+- 🔹 all amounts shown in $
+- 🔹 link social auth to backup account
+- 🔹 link external wallets
+- 🔹 UI to deposit into smart account
+- 🔹 UI to withdraw
+
+Built with
+
+- 🔸 react native 0.76+
+- 🔸 expo 52+
+- 🔸 nativewind 4+
+- 🔸 thirdweb
+
+Fork this repo, add your own logic, and start building!
+
+## Setup
+
+Create a new project in the [thirdweb dashboard](https://thirdweb.com/team).
+
+Copy the `.env.example` file to `.env`
+
+```bash
+cp .env.example .env
+```
+
+Add your client id to the `.env` file
+
+```bash
+EXPO_PUBLIC_THIRDWEB_CLIENT_ID=your_client_id
+```
+
+## Run the app
 
 1. Install dependencies
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
 ```bash
-npm run reset-project
+yarn install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+3. Start the app (ios or android)
+
+```bash
+yarn ios
+# or yarn android
+```
 
 ## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
+Learn more about building apps with expo and thirdweb with the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- [thirdweb dashboard](https://thirdweb.com/team) - manage your API keys, smart wallets policies, project settings, and more
+- [thirdweb docs](https://portal.thirdweb.com/) - learn how to use thirdweb to connect wallets, transact, and read onchain data
 
 ## Join the community
 
 Join our community of developers creating universal apps.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [thirdweb on GitHub](https://github.com/thirdweb-dev/js): View our open source platform and contribute.
+- [Discord community](https://discord.gg/thirdweb): Chat with thirdweb devs and ask questions.
