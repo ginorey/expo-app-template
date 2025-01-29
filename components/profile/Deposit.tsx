@@ -92,7 +92,7 @@ export default function Deposit() {
 
           <AccountAddress
             style={{
-              fontSize: 14,
+              fontSize: 12,
               color: Colors.primary,
               textAlign: "center",
               marginBottom: 16,
@@ -143,7 +143,6 @@ function QuickDeposit() {
         chain,
         client,
       });
-      console.log(amountInEth);
       const transaction = prepareTransaction({
         to: localAccount.address,
         value: toWei(amountInEth.result.toString()),
@@ -154,7 +153,6 @@ function QuickDeposit() {
         transaction,
         account: payerAccount,
       });
-      console.log(result);
       return result;
     },
   });

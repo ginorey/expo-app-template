@@ -10,6 +10,7 @@ import { client, inApp } from "@/constants/thirdweb";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ActivityIndicator, SafeAreaView, View } from "react-native";
 import { ThirdwebProvider, useAutoConnect, useConnect } from "thirdweb/react";
+import { useGuestConnect } from "../hooks/useGuestConnect";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -43,27 +44,9 @@ export default function RootLayout() {
 }
 
 function InnerApp() {
-  const autoConnecQuery = useAutoConnect({
-    client,
-    wallets: [inApp],
-  });
-  const connectMutation = useConnect();
-  useEffect(() => {
-    if (autoConnecQuery.data || autoConnecQuery.isLoading) {
-      return;
-    }
-    // if not autoconnected, login as guest
-    // TODO get last auth method instead?
-    connectMutation.connect(async () => {
-      await inApp.connect({
-        strategy: "guest",
-        client,
-      });
-      return inApp;
-    });
-  }, [autoConnecQuery.data, autoConnecQuery.isLoading]);
+  const { isConnecting } = useGuestConnect();
 
-  if (connectMutation.isConnecting || autoConnecQuery.isLoading) {
+  if (isConnecting) {
     return (
       <>
         <SafeAreaView className="flex-1 items-center justify-center bg-background">

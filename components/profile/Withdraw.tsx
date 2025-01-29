@@ -131,7 +131,7 @@ export default function Withdraw() {
             }
             style={{
               color: "white",
-              fontSize: 36,
+              fontSize: 48,
               fontWeight: "bold",
             }}
             queryOptions={{
