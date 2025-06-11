@@ -11,7 +11,11 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.thirdweb.tokentrader"
+      "bundleIdentifier": "com.thirdweb.tokentrader",
+      "appleTeamId": "3CUSF3W247",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -46,9 +50,12 @@
             "extraPods": [
               {
                 "name": "OpenSSL-Universal",
-                "configurations": ["Release", "Debug"],
+                "configurations": [
+                  "Release",
+                  "Debug"
+                ],
                 "modular_headers": true,
-                "version": "3.1.5004"
+                "version": "3.3.2000"
               }
             ]
           }
@@ -57,6 +64,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "37e0a012-e8b5-4f52-824c-26ae0ea01fa8"
+      }
     }
   }
 }
